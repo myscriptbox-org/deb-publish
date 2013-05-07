@@ -1,0 +1,5 @@
+This command adds a distribution to an account/domain. Synopsis:{br}
+{program} account.domain.distrib user@server domain distrib -add{br}
+Example:{br}
+{program} account.domain.distrib john@doe.com garagesoft.com ubuntu -add{br}
+

@@ -1,0 +1,4 @@
+[[GPG]]
+By default, {program} will use the {b}gpg{/b} command to manage the local and remote key databases. Use the {i}GPG{/i} environment variable to change this default. Example:{br}
+GPG=altgpg {program} ...{br}
+

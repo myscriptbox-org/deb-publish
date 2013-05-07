@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+user=$(remote_account_validate_return_user "$userAtServer")
+if [ $? -ne 0 ] ; then exit 1 ; fi
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+source "$UTIL_FOLDER/domain.validate-exists"
+domain_validate_exists "$domain"
+distrib="$3"
+source "$UTIL_FOLDER/distrib.validate"
+distrib_validate "$distrib"
+source "$UTIL_FOLDER/distrib.validate-exists"
+distrib_validate_exists "$distrib"
+release="$4"
+source "$UTIL_FOLDER/release.validate"
+release_validate "$release"
+
+#update releases file
+$THIS_SCRIPT account.domain.distrib.release "$userAtServer" "$domain" "$distrib" "$release" -control delete > /dev/null
+#generate distributions file
+$THIS_SCRIPT account.domain.distrib "$userAtServer" "$domain" "$distrib" -generate-reprepro-conf > /dev/null
+#delete packages
+remote_commands="
+cd /home/$user/$domain/html/apt/$distrib
+reprepro --delete clearvanished > /dev/null 2>&1
+reprepro deleteunreferenced > /dev/null 2>&1
+rm -rf dists/$release
+"
+$SSH "$userAtServer" 'bash -s' <<<"$remote_commands"
+

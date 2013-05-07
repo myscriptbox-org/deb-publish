@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, March 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+function domain_validate
+{
+        domain="$1"
+        validated=$(echo "$domain" | grep -P '(?=^.{5,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)')
+        #check if it contains a space
+        if [[ "$validated" = "" ]]; then
+                echo "ERROR: invalid domain name." >&2
+                exit 1
+        fi
+}
+

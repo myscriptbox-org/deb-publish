@@ -1,0 +1,4 @@
+This command checks if a particular distribution exists in a particular account/domain. Example:{br}
+{program} account.domain.distrib john@doe.com garagesoft.com ubuntu -exists{br}
+The command returns 'yes', if the distribution exists, and 'no', if it doesn't.
+

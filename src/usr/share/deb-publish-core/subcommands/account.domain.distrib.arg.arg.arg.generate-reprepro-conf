@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+user=$(remote_account_validate_return_user "$userAtServer")
+if [ $? -ne 0 ] ; then exit 1 ; fi
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+source "$UTIL_FOLDER/domain.validate-exists"
+domain_validate_exists "$domain"
+distrib="$3"
+source "$UTIL_FOLDER/distrib.validate"
+distrib_validate "$distrib"
+source "$UTIL_FOLDER/distrib.validate-exists"
+distrib_validate_exists "$distrib"
+
+#update distributions file
+
+tmpFile="/tmp/distributions.template.$$"
+$SCP -q $ETC_FOLDER/$THIS_SCRIPT.d/templates/distributions $userAtServer:$tmpFile
+
+remote_command="
+rm -f /home/$user/$domain/html/apt/$distrib/conf/override.*
+if [ -f /home/$user/$domain/html/apt/$distrib/conf/releases ] ; then
+        rm -f /home/$user/$domain/html/apt/$distrib/conf/distributions
+        while read release; do
+                cat $tmpFile | sed -e 's/{domain}/$domain/' \
+                        -e 's/{distrib}/$distrib/' -e 's/{release}/'\$release'/' \
+                         >> /home/$user/$domain/html/apt/$distrib/conf/distributions
+                echo ""  >> /home/$user/$domain/html/apt/$distrib/conf/distributions
+                touch /home/$user/$domain/html/apt/$distrib/conf/override.\$release
+        done < /home/$user/$domain/html/apt/$distrib/conf/releases
+fi
+rm -f $tmpFile
+"
+$SSH "$userAtServer" 'bash -s' <<<"$remote_command"
+

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, March 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+function package_validate
+{
+        package="$1"
+	if [[ "$package" = "" ]] ; then
+                echo "ERROR: invalid package name." >&2
+                exit 1
+	fi
+}
+

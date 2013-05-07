@@ -1,0 +1,3 @@
+This command deletes a package in an account/domain/distribution/release. Example:{br}
+{program} account.domain.distrib.release.package john@doe.com garagesoft.com ubuntu precise mechanic-viewer -delete
+

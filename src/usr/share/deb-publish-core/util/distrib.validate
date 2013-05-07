@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, March 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+function distrib_validate
+{
+        distrib="$1"
+	if [[ "$distrib" = "" ]] ; then
+                echo "ERROR: invalid distrib name." >&2
+                exit 1
+	fi
+}
+

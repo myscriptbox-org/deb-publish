@@ -1,0 +1,2 @@
+{program} manages a publication account on a remote server. The account holds one or more domains. Each domain holds one or more distributions. Each distribution holds one or more releases. Each release consists of one or more packages. Downloading from a distribution can be restricted to registered users only.
+

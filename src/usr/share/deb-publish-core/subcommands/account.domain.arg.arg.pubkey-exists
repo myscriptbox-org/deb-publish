@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+user=$(remote_account_validate_return_user "$userAtServer")
+if [ $? -ne 0 ] ; then exit 1 ; fi
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+result=$($SSH "$userAtServer" find /home/$user/$domain/html/*gpg.key 2> /dev/null )
+if [ "$result" = "" ] ; then
+        echo "no"
+else
+        echo "yes"
+fi
+

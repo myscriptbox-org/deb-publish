@@ -1,0 +1,2 @@
+This command shows the packages in a particular account/domain/distribution/release. Example:{br}
+{program} account.domain.distrib.release john@doe.com garagesoft.com ubuntu precise -show-packages

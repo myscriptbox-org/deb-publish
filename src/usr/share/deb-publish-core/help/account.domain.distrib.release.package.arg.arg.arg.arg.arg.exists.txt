@@ -1,0 +1,4 @@
+This command checks if a particular package exists in an account/domain/distribution/release. Example:{br}
+{program} account.domain.distrib.release.package john@doe.com garagesoft.com ubuntu precise mechanics-viewer -exists{br}
+The command returns 'yes' if the package exists in the account/domain/distribution/release or 'no', if it doesn't.
+

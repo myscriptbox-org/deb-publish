@@ -1,0 +1,8 @@
+This command shows the distribution details for a package in a particular account/domain/distribution/release. Example:{br}
+{program} account.domain.distrib.release.package john@doe.com garagesoft.com ubuntu precise mechanics-viewer -show{br}
+Typical output:{br}
+precise|main|i386: mechanics-viewer 1.0.3{br}
+precise|main|amd64: mechanics-viewer 1.0.3{br}
+precise|main|source: mechanics-viewer 1.0.3
+
+

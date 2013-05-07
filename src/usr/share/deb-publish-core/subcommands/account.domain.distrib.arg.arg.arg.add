@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+user=$(remote_account_validate_return_user "$userAtServer")
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+source "$UTIL_FOLDER/domain.validate-exists"
+domain_validate_exists "$domain"
+distrib="$3"
+source "$UTIL_FOLDER/distrib.validate"
+distrib_validate "$distrib"
+
+remote_commands="
+if [ ! -d /home/$user/$domain/html/apt ] ; then
+	echo 'domain $domain does not exist' >&2
+	exit 1
+fi
+mkdir -p /home/$user/$domain/html/apt/$distrib/conf
+mkdir -p /home/$user/$domain/html/apt/$distrib/incoming
+"
+
+#create folder
+$SSH "$userAtServer" 'bash -s' <<<"$remote_commands"
+
+#create options file
+cat "$ETC_FOLDER/$THIS_SCRIPT.d/templates/options" | \
+	sed -e 's/{distrib}/'"$distrib"'/g' -e "s|{rootpath}|/home/$user/$domain/html/apt/$distrib|" \
+	| $SSH "$userAtServer" "cat > /home/$user/$domain/html/apt/$distrib/conf/options"
+

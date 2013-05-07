@@ -1,0 +1,10 @@
+Origin: {domain}
+Label: {domain} apt repository for {distrib}
+Codename: {release}
+Suite: {release}
+Architectures: i386 amd64 source
+Components: main
+Description: {domain} apt repository for {distrib}
+SignWith: yes
+Pull: {release}
+

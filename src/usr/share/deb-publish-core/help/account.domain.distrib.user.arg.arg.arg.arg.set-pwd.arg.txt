@@ -1,0 +1,3 @@
+This command adds a user or updates his password in an account/domain/distribution. Example:{br}
+{program} account.domain.distrib.user john@doe.com garagesoft.com carl -set-passwd 'adf34#$'{br}
+

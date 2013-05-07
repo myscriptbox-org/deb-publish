@@ -1,0 +1,4 @@
+This command lifts the restriction to download from a particular distribution in a particular account/domain. It does not delete the user database. Example:{br}
+{program} account.domain.distrib john@doe.com garagesoft.com ubuntu -unrestrict{br}
+There is a separate command to delete the user database.
+

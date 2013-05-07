@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+user=$(remote_account_validate_return_user "$userAtServer")
+if [ $? -ne 0 ] ; then exit 1 ; fi
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+source "$UTIL_FOLDER/domain.validate-exists"
+domain_validate_exists "$domain"
+distrib="$3"
+source "$UTIL_FOLDER/distrib.validate"
+distrib_validate "$distrib"
+source "$UTIL_FOLDER/distrib.validate-exists"
+distrib_validate_exists "$distrib"
+release="$4"
+source "$UTIL_FOLDER/release.validate"
+release_validate "$release"
+source "$UTIL_FOLDER/release.validate-exists"
+release_validate_exists "$release"
+package="$5"
+source "$UTIL_FOLDER/package.validate"
+package_validate "$package"
+version="$6"
+
+folder="$7"
+
+#We need the following files
+#<package>_<version>.[dsc/tar.gz/deb/changes]
+
+dscFile="${package}_${version}-${release}.dsc"
+targzFile="${package}_${version}-${release}.tar.gz"
+debFile="${package}_${version}-${release}_all.deb"
+changesFile="${package}_${version}-${release}_amd64.changes"
+
+dscFilePath="$folder/$dscFile"
+targzFilePath="$folder/$targzFile"
+debFilePath="$folder/$debFile"
+changesFilePath="$folder/$changesFile"
+
+if [ ! -f "$dscFilePath" ] ; then
+	echo "ERROR: cannot find file '$dscFilePath'" >&2
+	exit 1
+fi
+
+if [ ! -f "$targzFilePath" ] ; then
+	echo "ERROR: cannot find file '$targzFilePath'" >&2
+	exit 1
+fi
+
+if [ ! -f "$debFilePath" ] ; then
+	echo "ERROR: cannot find file '$debFilePath'" >&2
+	exit 1
+fi
+
+if [ ! -f "$changesFilePath" ] ; then
+	echo "ERROR: cannot find file '$changesFilePath'" >&2
+	exit 1
+fi
+
+#copy the files
+$SCP -q "$dscFilePath" "$targzFilePath" "$debFilePath" "$changesFilePath" \
+                $userAtServer:/home/$user/$domain/html/apt/$distrib/incoming 
+
+remote_command="
+cd /home/$user/$domain/html/apt/$distrib
+exists=\$(reprepro list $release $package)
+if [ ! \"\$exists\" = \"\" ] ; then
+        reprepro remove $release $package
+fi
+reprepro -Vb . include $release /home/$user/$domain/html/apt/$distrib/incoming/$changesFile
+rm -f /home/$user/$domain/html/apt/$distrib/incoming/$dscFile
+rm -f /home/$user/$domain/html/apt/$distrib/incoming/$targzFile
+rm -f /home/$user/$domain/html/apt/$distrib/incoming/$debFile
+rm -f /home/$user/$domain/html/apt/$distrib/incoming/$changesFile
+"
+# execute remote script
+$SSH "$userAtServer" 'bash -s' <<< "$remote_command"
+

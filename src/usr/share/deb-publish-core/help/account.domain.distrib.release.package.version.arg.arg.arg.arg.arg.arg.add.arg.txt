@@ -1,0 +1,15 @@
+This command uploads a package to an account/domain/distribution/release for a particular version. Synopsis:{br}
+{program} account.domain.distrib.release.package.version \
+         user@server domain distribution release package version -add folder{br}
+Example:{br}
+{program} account.domain.distrib.release.package.version \
+         john@doe.com garagesoft.com ubuntu raring mechanics-viewer 0.7.3 -add myfolder{br}
+Use '.' as folder name for the uploading the current working folder:{br}
+{program} account.domain.distrib.release.package.version \
+         john@doe.com garagesoft.com ubuntu raring mechanics-viewer 0.7.3 -add .{br}
+The folder should contain 4 files:{br}
+{b}.deb{/b}: This file is the binary package. The filename should be: package_version-release_all.deb{br}
+{b}.changes{/b}: This file is the binary control package, describing the binary package. The filename should be: package_version-release_amd64.dsc{br}
+{b}.tar.gz{/b}: This file is the source package. The filename should be: package_version-release.tar.gz{br}
+{b}.dsc{/b}: This file is the source control package, describing the source package. The filename should be: package_version-release.dsc{br}
+

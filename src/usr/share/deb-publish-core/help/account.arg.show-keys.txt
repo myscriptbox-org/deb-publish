@@ -1,0 +1,3 @@
+This command shows all the keys in the account's key database. The private key is required for the purposes of signing packages. Example:{br}
+{program} account john@doe.com -show-keys
+

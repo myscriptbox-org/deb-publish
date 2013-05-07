@@ -1,0 +1,3 @@
+This command deletes a domain-level public key. Example:{br}
+{program} account.domain john@doe.com garagesoft.com -delete-pubkey
+

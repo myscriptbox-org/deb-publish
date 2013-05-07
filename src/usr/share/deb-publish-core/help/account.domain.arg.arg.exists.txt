@@ -1,0 +1,5 @@
+This command checks if a domain exists in the account:{br}
+{program} account.domain john@doe.com garagesoft.com -exists{br}
+The command outputs a 'yes' if it exists and a 'no' if it doesn't.
+
+

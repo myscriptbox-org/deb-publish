@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+remote_account_validate_return_user "$userAtServer" > /dev/null
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+source "$UTIL_FOLDER/domain.validate-exists"
+domain_validate_exists "$domain"
+distrib="$3"
+source "$UTIL_FOLDER/distrib.validate"
+distrib_validate "$distrib"
+source "$UTIL_FOLDER/distrib.validate-exists"
+distrib_validate_exists "$distrib"
+release="$4"
+source "$UTIL_FOLDER/release.validate"
+release_validate "$release"
+
+#update releases file
+$THIS_SCRIPT account.domain.distrib.release "$userAtServer" "$domain" "$distrib" "$release" -control add > /dev/null
+#generate distributions file
+$THIS_SCRIPT account.domain.distrib "$userAtServer" "$domain" "$distrib" -generate-reprepro-conf > /dev/null
+#generate override files
+

@@ -1,0 +1,6 @@
+This command uploads a public key for a domain for an account, straight from your local gpg database. Synopsis:{br}
+{program} account.domain [user@server] [domain] -upload-pubkey-from-gpg-man key-email saveAsFilename{br}
+Example:{br}
+{program} account.domain john@doe.com garagesoft.com -upload-pubkey-from-gpg-man packages@garagesoft.com garagesoft.pub{br}
+The {i}saveAsFilename{/i} parameter is optional. If it is not supplied, the system wil save the file under the name {i}gpg.key{/i}. There must be a public key available under the email {i}key-email{/i} in the gpg database.
+

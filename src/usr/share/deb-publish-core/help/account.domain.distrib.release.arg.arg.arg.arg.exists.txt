@@ -1,0 +1,4 @@
+This command checks if a particular release exists in an account/domain/distribution. Example:{br}
+{program} account.domain.distrib.release john@doe.com garagesoft.com ubuntu precise -exists{br}
+If the release exists, the command outputs a 'yes'. Otherwise, a 'no'.
+

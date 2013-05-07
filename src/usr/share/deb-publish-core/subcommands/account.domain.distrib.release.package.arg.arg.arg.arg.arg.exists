@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+remote_account_validate_return_user "$userAtServer" > /dev/null
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+source "$UTIL_FOLDER/domain.validate-exists"
+domain_validate_exists "$domain"
+distrib="$3"
+source "$UTIL_FOLDER/distrib.validate"
+distrib_validate "$distrib"
+source "$UTIL_FOLDER/distrib.validate-exists"
+distrib_validate_exists "$distrib"
+release="$4"
+source "$UTIL_FOLDER/release.validate"
+release_validate "$release"
+source "$UTIL_FOLDER/release.validate-exists"
+release_validate_exists "$release"
+package="$5"
+source "$UTIL_FOLDER/package.validate"
+package_validate "$package"
+
+result=$($THIS_SCRIPT account.domain.distrib.release.package "$userAtServer" "$domain" "$distrib" "$release" "$package" -show)
+if [ "$result" = "" ] ; then
+        echo "no"
+else
+        echo "yes"
+fi
+

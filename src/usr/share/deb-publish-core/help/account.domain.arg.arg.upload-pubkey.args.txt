@@ -1,0 +1,8 @@
+This command uploads a public key for a domain for an account. Synopsis:{br}
+{program} account.domain [user@server] [domain] -upload-pubkey [keyfile] [saveAsFilename]{br}
+Example:{br}
+{program} account.domain john@doe.com garagesoft.com -upload-pubkey mykey.pub garagesoft.pub{br}
+Note that the file extension does not matter. The {i}saveAsFilename{/i} parameter is optional. If it is not supplied, the system wil save the file under the same name as the {i}keyfile{/i} itself. You can also upload by supplying a file on stdin by specifying the argument '-' for the {i}keyfile{/i} parameter. Example:{br}
+cat mykey.pub | {program} account.domain john@doe.com garagesoft.com -upload-pubkey - garagesoft.pub{br}
+Again, the {i}saveAsFilename{/i} argument is optional. If you do not supply it, the system will save it as 'gpg.key' on the server.
+

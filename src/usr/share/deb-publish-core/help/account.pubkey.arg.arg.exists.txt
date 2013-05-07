@@ -1,0 +1,5 @@
+This command checks if a public key exists in a remote account's key database. Example:{br}
+{program} account.pubkey john@doe.com garagesoft.com -exists{br}
+The command outputs 'yes' if the public key exists and 'no' if it doesn't.
+The key is represented by the second email address.
+

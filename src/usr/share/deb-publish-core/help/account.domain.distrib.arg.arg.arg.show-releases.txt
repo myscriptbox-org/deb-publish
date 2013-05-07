@@ -1,0 +1,3 @@
+This command lists the releases for a distribution in a particular account/domain. Example{br}:
+{program} account.domain.distrib john@doe.com garagesoft.com ubuntu -show-releases
+

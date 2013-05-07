@@ -1,0 +1,42 @@
+Rationale in the data managed by {program}:{/b}{br}
+An account has a database with keys. Each key has a public and a private part. The account manager uses the private keys to sign packages{br}
+An account has one or more domains.{br}
+A domain has one public key. Users installing from the domain, will download this key.{br}
+A domain has one or more distributions.{br}
+A distribution has a list of registered users.{br}
+A distribution has one or more releases.{br}
+A release has one or more packages.{br}
+
+[[account]]
+Use this object path to perform account-wide operations or to manage the remote gnupg key database. The remote gnupg database must contain the signing private key for verifying the signature of a package.
+
+[[account.key]]
+Use this object path to manage a key, both the public and the private part, in the remote gnupg key database.
+
+[[account.prikey]]
+Use this object path to manage just the private part of the key in the remote gnupg key database.
+
+[[account.pubkey]]
+Use this object path to manage just the public part of the key in the remote gnupg key database.
+
+[[account.domain]]
+Use this object path to manage a domain in a remote account.
+
+[[account.domain.distrib]]
+Use this object path to manage a distribution in a remote account/domain.
+
+[[account.domain.distrib.package]]
+Use this object path to manage a package in a remote account/domain/distribution across releases.
+
+[[account.domain.distrib.release]]
+Use this object path to manage a release in a remote account/domain/distribution.
+
+[[account.domain.distrib.release.package]]
+Use this object path to manage a package in a remote account/domain/distribution/release.
+
+[[account.domain.distrib.release.package.version]]
+Use this object path to manage a package in a particular version in a remote account/domain/distribution/release.
+
+[[account.domain.distrib.user]]
+Use this object path to manage registered users in a remote account/domain/distribution.
+

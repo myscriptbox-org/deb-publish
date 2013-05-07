@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+remote_account_validate_return_user "$userAtServer" > /dev/null
+emailToFind="$2"
+remote_account_validate_return_user "$emailToFind" > /dev/null
+while read line; do
+	IFS='|' read email id name trust pub pri <<< "$line"
+        if [ "$emailToFind" = "$email" ] && [ "$pub" = "yes" ] ; then
+                echo "yes"
+                exit 0
+        fi	
+done < <($SSH "$userAtServer" "export GPG=$GPG; bash -s" < "$UTIL_FOLDER/remote-db.list-keys" | sort)
+echo "no"
+

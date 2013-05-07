@@ -1,0 +1,7 @@
+This command adds a release to a particular account/domain/distribution. Synopsis:{br}
+{program} account.domain.distrib.release user@server domain distrib release -add{br}
+Example:{br}
+{program} account.domain.distrib.release john@doe.com garagesoft.com ubuntu raring -add{br}
+This example adds the 'raring' release to the 'ubuntu' distribution.
+
+

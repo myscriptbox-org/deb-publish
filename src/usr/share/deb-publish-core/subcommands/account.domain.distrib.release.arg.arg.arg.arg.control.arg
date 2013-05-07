@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+user=$(remote_account_validate_return_user "$userAtServer")
+if [ $? -ne 0 ] ; then exit 1 ; fi
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+source "$UTIL_FOLDER/domain.validate-exists"
+domain_validate_exists "$domain"
+distrib="$3"
+source "$UTIL_FOLDER/distrib.validate"
+distrib_validate "$distrib"
+source "$UTIL_FOLDER/distrib.validate-exists"
+distrib_validate_exists "$distrib"
+release="$4"
+source "$UTIL_FOLDER/release.validate"
+release_validate "$release"
+action="$5"
+if [ ! "$action" = "add" ] && [ ! "$action" = "delete" ] ; then
+        echo "ERROR: action must be either 'add' or 'delete'" >&2
+        exit 1
+fi
+
+#update releases file
+
+remote_command="
+action='$action'
+tmpFile=/tmp/releases.$$
+if [ -f /home/$user/$domain/html/apt/$distrib/conf/releases ] ; then
+        cat /home/$user/$domain/html/apt/$distrib/conf/releases | grep -v '$release' > \$tmpFile 
+else
+        touch \$tmpFile
+fi
+if [[ $action == 'add' ]] ; then
+        echo '$release' >> \$tmpFile
+        tmpFile2=/tmp/releases.$$.2
+        cat \$tmpFile | sort | uniq > \$tmpFile2
+        mv \$tmpFile2 \$tmpFile
+fi
+rm -f /home/$user/$domain/html/apt/$distrib/conf/releases
+mv \$tmpFile /home/$user/$domain/html/apt/$distrib/conf/releases
+"
+$SSH "$userAtServer" 'bash -s' <<<"$remote_command"
+

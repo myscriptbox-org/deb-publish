@@ -1,0 +1,4 @@
+This command checks if a domain-level public key exists. Example:{br}
+{program} account.domain john@doe.com garagesoft.com -pubkey-exists{br}
+If the public key exists, the command outputs a 'yes'. Otherwise, a 'no'.
+

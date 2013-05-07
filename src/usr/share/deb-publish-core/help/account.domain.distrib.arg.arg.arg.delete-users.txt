@@ -1,0 +1,3 @@
+This command deletes all the users for a particular account/domain. Example:{br}
+{program} account.domain.distrib john@doe.com garagesoft.com ubuntu -delete-users{br}
+

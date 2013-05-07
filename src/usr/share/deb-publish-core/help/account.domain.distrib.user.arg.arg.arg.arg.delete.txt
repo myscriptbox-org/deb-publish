@@ -1,0 +1,3 @@
+This command deletes a user from an account/domain/distribution. Example:{br}
+{program} account.domain.distrib.user john@doe.com garagesoft.com ubuntu carl -delete
+

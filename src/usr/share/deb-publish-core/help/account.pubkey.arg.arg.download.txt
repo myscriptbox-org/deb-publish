@@ -1,0 +1,4 @@
+This command downloads a public key from the remote account's key database. Example:{br}
+{program} account.pubkey john@doe.com info@garagesoft.com -download > myfile.pub{br}
+You can choose any name for the 'myfile.pub' argument.
+

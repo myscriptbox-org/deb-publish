@@ -1,0 +1,3 @@
+This command lists the domains for an account. In each domain, the user can publish a reprepro repository. Example{br}
+{program} account john@doe.com -show-domains
+

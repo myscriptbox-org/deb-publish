@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, March 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+function release_validate
+{
+        release="$1"
+	if [[ "$release" = "" ]] ; then
+                echo "ERROR: invalid release name." >&2
+                exit 1
+	fi
+}
+

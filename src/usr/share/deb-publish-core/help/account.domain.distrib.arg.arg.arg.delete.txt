@@ -1,0 +1,5 @@
+This command deletes a distribution from an account/domain. Synopsis:{br}
+{program} account.domain.distrib user@server domain distrib -delete{br}
+Example:{br}
+{program} account.domain.distrib john@doe.com garagesoft.com ubuntu -delete{br}
+

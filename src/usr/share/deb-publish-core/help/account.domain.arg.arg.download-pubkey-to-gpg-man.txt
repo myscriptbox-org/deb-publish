@@ -1,0 +1,3 @@
+This command downloads downloads a domain-level public key in your local gpg database:{br}
+{program} account.domain john@doe.com garagesoft.com -download-pubkey-to-gpg-man
+

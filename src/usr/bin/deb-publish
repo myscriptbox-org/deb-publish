@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# deb publish
+#
+# Tool for the user to manage his debian publications
+#
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+#defaults, in case sshConnection.conf does not define them
+#will ordinarily be overwritten in sshConnection.conf
+export SSH=ssh
+export SCP=scp
+
+export GPG=${GPG:-gpg}
+
+#-------------------------------------------------------
+# Basic location variables
+#-------------------------------------------------------
+export THIS_SCRIPT=$(basename "$0")
+THIS_FOLDER=$(dirname "$0")
+if [[ $THIS_FOLDER == "." ]]; then 
+	THIS_FOLDER="$PWD"
+fi
+export ROOT_FOLDER=$(dirname "$THIS_FOLDER")
+export CORE_FOLDER="$ROOT_FOLDER/share/$THIS_SCRIPT-core"
+#-------------------------------------------------------
+# The following folders are standard locations
+#-------------------------------------------------------
+ABSOLUTE_ROOT_FOLDER=$(dirname "$ROOT_FOLDER")
+export ETC_FOLDER="$ABSOLUTE_ROOT_FOLDER/etc"
+export ETC_SCRIPT_FOLDER="$ABSOLUTE_ROOT_FOLDER/etc/$THIS_SCRIPT.d"
+export UTIL_FOLDER="$CORE_FOLDER/util"
+export ROUTER_FOLDER="$CORE_FOLDER/router"
+export SUBCOMMANDS_FOLDER="$CORE_FOLDER/subcommands"
+export HELP_FOLDER="$CORE_FOLDER/help"
+export FINAL_MSG_FOLDER="$CORE_FOLDER/final-msg"
+#-------------------------------------------------------
+# Open persistent connection
+#-------------------------------------------------------
+sshUser="$2"
+if [ ! "$sshUser" = '-' ] && [ ! ${sshUser:0:1} = '-' ] ; then
+	source "$ETC_FOLDER/$THIS_SCRIPT.d/sshConnection.conf"
+fi
+#-------------------------------------------------------
+# Route to the subcommand script
+#-------------------------------------------------------
+source "$ROUTER_FOLDER/subcommand.route"
+$SUBCOMMAND
+export SUBCOMMAND_RETCODE=$?
+source "$FINAL_MSG_FOLDER/command.final-output"
+#-------------------------------------------------------
+

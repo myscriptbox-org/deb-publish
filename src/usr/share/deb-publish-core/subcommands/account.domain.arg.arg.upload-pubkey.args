@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+user=$(remote_account_validate_return_user "$userAtServer")
+if [ $? -ne 0 ] ; then exit 1 ; fi
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+file="$3"
+fileName="$4"
+
+if [ "$file" = "-" ] ; then
+        if [ "$fileName" = "" ] ; then
+	        fileName='gpg.key'
+        fi
+        $SSH $userAtServer "cat > /home/$user/$domain/html/$fileName"
+else
+        if [ "$fileName" = "" ] ; then
+	        fileName=$(basename "$file")
+        fi
+        cat "$file" | $SSH $userAtServer "cat > /home/$user/$domain/html/$fileName"
+fi
+

@@ -1,0 +1,3 @@
+This command checks if a user exists in an account/domain/distribution. Example:{br}
+{program} account.domain.distrib.user john@doe.com garagesoft.com ubuntu carl -exists{br}
+The command returns 'yes' if the user existes and 'no' if he doesn't.

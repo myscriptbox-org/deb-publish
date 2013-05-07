@@ -1,0 +1,4 @@
+This command checks if the {b}.htaccess{/b} file exists for a distribution in a particular account/domain. Example:{br}
+{program} account.domain.distrib john@doe.com garagesoft.com ubuntu -htaccess-exists{br}
+The command outputs 'yes' if the file exists and 'no', if it doesn't.
+

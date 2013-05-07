@@ -1,0 +1,4 @@
+This command updates the {b}releases{/b} file in the {b}conf{/b} folder in the reprepro distribution folder. This command is called automatically when adding or removing a release. Example:{br}
+{program} account.domain.distrib.release john@doe.com garagesoft.com ubuntu precise -control add{b}
+The {b}-control{/b} action takes the argument {b}add{/b} or {b}delete{/b}. This step is will prepare the regeneration of the {b}conf/distribution{/b} and {b}conf/override.*{/b} files.
+

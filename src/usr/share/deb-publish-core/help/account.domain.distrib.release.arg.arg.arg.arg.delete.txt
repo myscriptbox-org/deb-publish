@@ -1,0 +1,3 @@
+This command deletes a particular release in a particular account/domain/distribution. Example{br}:
+{program} account.domain.distrib.release john@doe.com garagesoft.com ubuntu precise -delete
+

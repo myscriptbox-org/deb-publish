@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+user=$(remote_account_validate_return_user "$userAtServer")
+if [ $? -ne 0 ] ; then exit 1 ; fi
+domain="$2"
+source "$UTIL_FOLDER/domain.validate"
+domain_validate "$domain"
+email="$3"
+fileName="$4"
+if [ "$fileName" = "" ] ; then
+	fileName='gpg.key'
+fi
+exists=$(gpg-man key.public "$email" -exists)
+if [ "$exists" = "no" ] ; then
+        echo "ERROR: no public key available for '$email'" >&2
+        exit 1
+fi
+gpg-man key.public "$email" -show | $SSH $userAtServer "cat > /home/$user/$domain/html/$fileName"
+

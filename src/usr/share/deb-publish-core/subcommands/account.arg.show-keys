@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+remote_account_validate_return_user "$userAtServer" > /dev/null
+FORMAT="%-30s %-10s %-7s %-7s %-7s %-s\n"
+printf "$FORMAT" "email" "id" "trust" "public" "private" "name"
+while read line; do
+	IFS='|' read email id name trust pub pri <<< "$line"	
+	printf "$FORMAT" "$email" "$id" "$trust" "$pub" "$pri" "$name"
+done < <($SSH "$userAtServer" "export GPG=$GPG; bash -s" < "$UTIL_FOLDER/remote-db.list-keys" | sort)
+
+

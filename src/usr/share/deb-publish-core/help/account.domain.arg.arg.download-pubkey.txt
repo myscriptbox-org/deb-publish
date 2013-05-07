@@ -1,0 +1,3 @@
+This command downloads a domain-level public key. Example:{br}
+{program} account.domain john@doe.com garagesoft.com -download-pubkey
+

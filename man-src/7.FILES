@@ -1,0 +1,9 @@
+[[/etc/deb-publish-root.d/templates/distributions]]
+This file is the template configuration file for a reprepro 'conf/distributions' file. In the lingo of {program} this file contains the 'releases'. It has the following template variables: {domain}, {distrib}, and {release}. The template is repeated for each release in the reprepro repository.
+
+[[/etc/deb-publish-root.d/templates/options]]
+This file is the template configuration file for a reprepro 'conf/options' file. It has the following template variable: {rootpath}.
+
+[[/etc/deb-publish-root.d/templates/htaccess]]
+This file the template apache configuration file for a restricted distribution. It has the following template configuration variables: {user}, {domain}, and {distrib}. In this context, 'user' means 'account'.
+

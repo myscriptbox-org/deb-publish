@@ -1,0 +1,12 @@
+exists
+show
+show-releases
+show-packages
+show-users
+show-distribs
+show-domains
+show-keys
+htpasswd-exists
+htaccess-exists
+pubkey-exists
+

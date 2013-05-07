@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, April 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+userAtServer="$1"
+source "$UTIL_FOLDER/remote-account.validate"
+remote_account_validate_return_user "$userAtServer" > /dev/null
+#read email addresses
+declare -a emails
+while read line; do
+	IFS='|' read email id name trust pub pri <<< "$line"	
+        emails=("${emails[@]}" $email)
+done < <($SSH "$userAtServer" "export GPG=$GPG; bash -s" < "$UTIL_FOLDER/remote-db.list-keys")
+remote_command="
+emails=\"${emails[@]}\"
+for email in \$emails; do
+        fingerprint=\$($GPG --fingerprint \"\$email\" | head -n2 | tail -n1 | sed 's/.*= \(.*\)/\1/' | tr --delete ' ')
+        echo \"\$fingerprint:6:\" | $GPG --import-ownertrust
+done
+"
+#echo $remote_command
+$SSH "$userAtServer" 'bash -s' <<<"$remote_command"
+
+
