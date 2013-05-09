@@ -1,5 +1,5 @@
 This command uploads a public key file to the account's key database. Example:{br}
-{command} account john@doe.com -upload-pubkey mykey.gpg.pub{br}
+{program} account john@doe.com -upload-pubkey mykey.gpg.pub{br}
 The file extension does not matter. You can also supply the key on stdin by using filename '-'. Example:{br}
-cat mykey.gpg.pub | {command} account john@doe.com -upload-pubkey -{br}
+cat mykey.gpg.pub | {program} account john@doe.com -upload-pubkey -{br}
 

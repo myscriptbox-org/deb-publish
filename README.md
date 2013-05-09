@@ -1,4 +1,4 @@
-# man page for deb-publish.
+# man page for deb-publish
 ## NAME 
 **deb-publish** manages a publication account on a remote server. The account holds one or more domains. Each domain holds one or more distributions. Each distribution holds one or more releases. Each release consists of one or more packages. Downloading from a distribution can be restricted to registered users only.
 
@@ -68,9 +68,9 @@ This command shows all the keys in the account's key database. The private key i
 
 ### account [obj] -upload-prikey [arg]
 This command uploads a private key file to the account's key database. Example:  ;
-{command} account john@doe.com -upload-prikey mykey.gpg.pri  
+**deb-publish** account john@doe.com -upload-prikey mykey.gpg.pri  
 The file extension does not matter. You can also supply the key on stdin by using filename '-'. Example:  
-cat mykey.gpg.pri | {command} account john@doe.com -upload-prikey -  
+cat mykey.gpg.pri | **deb-publish** account john@doe.com -upload-prikey -  
 
 ### account [obj] -show-domains
 This command lists the domains for an account. In each domain, the user can publish a reprepro repository. Example  
@@ -82,9 +82,9 @@ This command sets the trust level of all keys to 6. Below that level, the keys a
 
 ### account [obj] -upload-pubkey [arg]
 This command uploads a public key file to the account's key database. Example:  
-{command} account john@doe.com -upload-pubkey mykey.gpg.pub  
+**deb-publish** account john@doe.com -upload-pubkey mykey.gpg.pub  
 The file extension does not matter. You can also supply the key on stdin by using filename '-'. Example:  
-cat mykey.gpg.pub | {command} account john@doe.com -upload-pubkey -  
+cat mykey.gpg.pub | **deb-publish** account john@doe.com -upload-pubkey -  
 
 ### account.domain.arg [obj] -download-pubkey-to-gpg-man
 This command downloads downloads a domain-level public key in your local gpg database:  
@@ -155,7 +155,7 @@ This command deletes all the users for a particular account/domain. Example:
 
 ### account.domain.distrib.arg.arg [obj] -restrict
 This command restricts a distribution to registered users only for a distribution in a particular account/domain. All releases in that distribution will be restricted too. Example:  
-{command} account.domain.distrib john@doe.com garagesoft.com ubuntu -restrict  
+**deb-publish** account.domain.distrib john@doe.com garagesoft.com ubuntu -restrict  
 Only users with a valid username and password will be able to download from this distribution.
 
 ### account.domain.distrib.arg.arg [obj] -delete
@@ -321,3 +321,4 @@ Report bugs to: erik@sankuru.biz
 
 # COPYRIGHT
 Licensed under GPL
+folder/generate-readme-stdout executed.

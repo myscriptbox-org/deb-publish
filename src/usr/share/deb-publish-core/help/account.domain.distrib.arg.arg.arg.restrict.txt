@@ -1,4 +1,4 @@
 This command restricts a distribution to registered users only for a distribution in a particular account/domain. All releases in that distribution will be restricted too. Example:{br}
-{command} account.domain.distrib john@doe.com garagesoft.com ubuntu -restrict{br}
+{program} account.domain.distrib john@doe.com garagesoft.com ubuntu -restrict{br}
 Only users with a valid username and password will be able to download from this distribution.
 

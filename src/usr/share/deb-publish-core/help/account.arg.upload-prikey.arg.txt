@@ -1,5 +1,5 @@
 This command uploads a private key file to the account's key database. Example:{br};
-{command} account john@doe.com -upload-prikey mykey.gpg.pri{br}
+{program} account john@doe.com -upload-prikey mykey.gpg.pri{br}
 The file extension does not matter. You can also supply the key on stdin by using filename '-'. Example:{br}
-cat mykey.gpg.pri | {command} account john@doe.com -upload-prikey -{br}
+cat mykey.gpg.pri | {program} account john@doe.com -upload-prikey -{br}
 
