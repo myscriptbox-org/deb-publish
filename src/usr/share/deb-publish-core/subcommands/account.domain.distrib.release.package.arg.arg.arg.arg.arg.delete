@@ -30,13 +30,8 @@ package_validate "$package"
 
 remote_command="
 cd /home/$user/$domain/html/apt/$distrib
-exists=\$(reprepro list $release $package)
-if [ ! \"\$exists\" = \"\" ] ; then
-        reprepro remove $release $package > /dev/null 2>&1
-else
-        echo \"package '$package' does not exist in release '$release'\"
-        exit 1 
-fi
+reprepro remove $release $package
+reprepro deleteunreferenced
 "
 # execute remote script
 $SSH "$userAtServer" 'bash -s' <<< "$remote_command"

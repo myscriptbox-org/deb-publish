@@ -70,10 +70,8 @@ $SCP -q "$dscFilePath" "$targzFilePath" "$debFilePath" "$changesFilePath" \
 
 remote_command="
 cd /home/$user/$domain/html/apt/$distrib
-exists=\$(reprepro list $release $package)
-if [ ! \"\$exists\" = \"\" ] ; then
-        reprepro remove $release $package
-fi
+reprepro remove $release $package
+reprepro deleteunreferenced
 reprepro -Vb . include $release /home/$user/$domain/html/apt/$distrib/incoming/$changesFile
 rm -f /home/$user/$domain/html/apt/$distrib/incoming/$dscFile
 rm -f /home/$user/$domain/html/apt/$distrib/incoming/$targzFile
