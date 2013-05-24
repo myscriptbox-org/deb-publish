@@ -30,8 +30,8 @@ package_validate "$package"
 
 remote_command="
 cd /home/$user/$domain/html/apt/$distrib
-reprepro remove $release $package
-reprepro deleteunreferenced
+reprepro remove $release $package > /dev/null 2>&1
+reprepro deleteunreferenced > /dev/null 2>&1
 "
 # execute remote script
 $SSH "$userAtServer" 'bash -s' <<< "$remote_command"

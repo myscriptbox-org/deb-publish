@@ -1,4 +1,4 @@
-[[GPG]]
-By default, {program} will use the {b}gpg{/b} command to manage the local and remote key databases. Use the {i}GPG{/i} environment variable to change this default. Example:{br}
-GPG=altgpg {program} ...{br}
+[[CONF_FOLDER]]
+By default, {program} will read and write its {b}defaults{/b}, {b}domain{/b}, and {b}distro-releases{/b} files from the folder {b}~/.deb-publish-simple{b}. Use the {i}GPG{/i} environment variable to change this default folder. Example:{br}
+CONF_FOLDER=/home/john/configs {program} ...{br}
 

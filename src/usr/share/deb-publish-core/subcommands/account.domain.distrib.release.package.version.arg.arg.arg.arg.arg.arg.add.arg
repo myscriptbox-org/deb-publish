@@ -70,8 +70,8 @@ $SCP -q "$dscFilePath" "$targzFilePath" "$debFilePath" "$changesFilePath" \
 
 remote_command="
 cd /home/$user/$domain/html/apt/$distrib
-reprepro remove $release $package
-reprepro deleteunreferenced
+reprepro remove $release $package  > /dev/null 2>&1
+reprepro deleteunreferenced > /dev/null 2>&1
 reprepro -Vb . include $release /home/$user/$domain/html/apt/$distrib/incoming/$changesFile
 rm -f /home/$user/$domain/html/apt/$distrib/incoming/$dscFile
 rm -f /home/$user/$domain/html/apt/$distrib/incoming/$targzFile
