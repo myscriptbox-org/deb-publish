@@ -47,6 +47,7 @@ fi
 #-------------------------------------------------------
 # Route to the subcommand script
 #-------------------------------------------------------
+source "$UTIL_FOLDER/msb.debug.router"
 source "$ROUTER_FOLDER/subcommand.route"
 $SUBCOMMAND
 export SUBCOMMAND_RETCODE=$?
